@@ -11,15 +11,29 @@
 % Pagestyle for Thesis (Nicolas Travers - 2020) 
 %
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{template_book}[2016/02/22 v1.1 from Nicolas Travers]
+\ProvidesClass{template_book}[2016/02/22 v1.1 from Nicolas Travers adapted by Luc Laurent]
 \usepackage{a4,fancyhdr,comment,times,epsf,latexsym,epsfig,tikz,kpfonts,lastpage,fullpage,graphicx,enumitem,ifthen,listings,upquote,minted,amsthm,caption}
 \usepackage[explicit]{titlesec}
+\usepackage{ifxetex,ifluatex}
+\newif\ifxetexorluatex
+\ifxetex
+  \xetexorluatextrue
+\else
+  \ifluatex
+    \xetexorluatextrue
+  \else
+    \xetexorluatexfalse
+  \fi
+\fi
+
+\ifxetexorluatex
 \usepackage{fontspec}
+\fi
 \usepackage[hidelinks]{hyperref}
 
 %%% Si vous avez des caractères à changer
-%\usepackage[latin1]{inputenc}
-%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % ou latin1 pour windows
+\usepackage[T1]{fontenc}
 
 
 %%%%% Typographie en français.
@@ -32,13 +46,18 @@
 \definecolor{fond4Maison}{RGB}{133,119,97}
 
 %%%%%%%%%%%% Polices de caractère du système. Maple -> Maison %%%%%%%%
+\ifxetexorluatex
 \newfontfamily\Maisonfont{Maple}
 \newcommand\MaisonFont[1]{{\Maisonfont #1}}
 \newfontfamily\Maisonboldfont{Maple}
 \newcommand\MaisonBoldFont[1]{{\Maisonboldfont #1}}
+\fi
 
-
+\ifxetexorluatex
 \newtheoremstyle{theoremStyle}{0pt}{4pt}{\color{black}}{}{\color{fondMaison}\Maisonboldfont\bfseries}{:}{ }{}
+\else
+\newtheoremstyle{theoremStyle}{0pt}{4pt}{\color{black}}{}{\color{fondMaison}\bfseries}{:}{ }{}
+\fi
 \theoremstyle{theoremStyle}
 
 \newtheorem{Example}{Example}[section]
@@ -48,12 +67,21 @@
 \newtheorem{Proof}{Proof}[section]
 \newtheorem{Remark}{Remark}[section]
 
+\ifxetexorluatex
 \rfoot{\color{fondMaison}\MaisonBoldFont{\thepage/\pageref{LastPage}}}
-\lfoot{\color{fondMaison}\MaisonBoldFont{\nom}}
+\lfoot{\color{fondMaison}\MaisonBoldFont{\nomcourt}}
 \cfoot{\color{fondMaison}\MaisonBoldFont{\titreShort}}
 
 \lhead{\color{fondMaison}\large \MaisonBoldFont{\nouppercase{\bfseries{\leftmark}}}\\
 \color{fond2Maison}\large \MaisonBoldFont{\nouppercase{\bfseries{\rightmark}}} \color{black}}
+\else
+\rfoot{\color{fondMaison}{\thepage/\pageref{LastPage}}}
+\lfoot{\color{fondMaison}{\nomcourt}}
+\cfoot{\color{fondMaison}{\titreShort}}
+
+\lhead{\color{fondMaison}\large {\nouppercase{\bfseries{\leftmark}}}\\
+\color{fond2Maison}\large {\nouppercase{\bfseries{\rightmark}}} \color{black}}
+\fi
 %%%%%%%%%%%% POUR RAJOUTER LE LOGO SUR TOUTES LES PAGES %%%%%%%%%%
 \rhead{%\includegraphics[height=0.5cm]{\dir/LOGO.jpg}
 }
@@ -69,7 +97,7 @@
 	\node[xshift=0\paperwidth,yshift=1cm,text=white,font=\bf\Large,anchor=north west] {
 		\includegraphics[scale=.3]{\logouniversite}
 	};
-	\node[anchor=north east] at (current page.north east){
+	\node[anchor=north east,xshift=\textwidth] at (current page.north west){
 		\includegraphics[scale=.3]{\logolabo}
 	};
 %	\node[xshift=.6\paperwidth,yshift=2cm,text=white,font=\bf\Large] {
@@ -111,6 +139,9 @@
 			\begin{flushleft}
 			\scshape Encadrant(s):
 			\end{flushleft}
+			\begin{footnotesize}
+			\encadrants
+			\end{footnotesize}
 			\begin{flushleft}
 			\scshape Jury:
 			\end{flushleft}
