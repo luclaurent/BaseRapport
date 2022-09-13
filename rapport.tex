@@ -1,0 +1,57 @@
+\documentclass[10pt]{article}
+
+\def\nom{NOM}
+\def\nomcourt{NOM court}	% bas de page
+\def\email{prenom.nom.auditeur@lecnam.net}
+\def\etablissement{LABORATOIRE}
+\def\titre{TITRE}
+\def\titreShort{TITRE COURT}
+\def\universite{Conservatoire national des arts et métiers}
+\def\logouniversite{figs/LeCnamLOGOcmjn}%LOGO
+\def\logolabo{figs/LOGO_LMSSC}%LOGO
+\def\encadrants{
+	M. XXX \textsc{Yyyy}, Professeur des Universités de ...}
+\def\jury{
+	{\sc Prof 1}\\
+	{\sc Prof 2}}
+\def\ecoledoc{École doctorale ...}
+\def\date{DATE}
+
+
+
+\usepackage{template_book}
+
+\input{definition.tex}
+
+\graphicspath{{figs/}}
+
+\definecolor{mygray}{gray}{0.4}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\setlength{\abovedisplayskip}{6pt}
+\setlength{\belowdisplayskip}{6pt}
+% \begingroup
+\tableofcontents
+% \endgroup
+
+\input{0_resume}
+\input{0_remerciements}
+	\newpage
+\input{01_introduction}
+
+\input{02_etat_de_lart}
+\input{03_contribution}
+\input{09_conclusion}
+\newpage
+\renewcommand{\bibname}{Bibliography}
+\bibliographystyle{alpha}
+\bibliography{biblio}
+
+
+\input{0_abstract}
+
+\end{document}

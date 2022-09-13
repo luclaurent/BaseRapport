@@ -1,0 +1,39 @@
+\section{Introduction}
+
+J'inclus une figure
+\begin{figure}[htp!]
+\centering
+\includegraphics[width=0.5\textwidth]{LOGO_LMSSC}
+\caption{Une légende}
+\label{unlabel}
+\end{figure}
+J'écris une équation dans la ligne \(\exp x+10\geq0\).
+J'écris une équation centrée et isolée:
+\begin{equation}
+	f(\theta)=\cos\theta+\sin\theta
+	\label{unautrelabel}
+\end{equation}
+
+Je fais référence à ma figure \ref{unlabel} ou à une équation~\ref{unautrelabel}.
+
+\begin{equation}
+    \mathbf{A}=\begin{bmatrix}
+        A&B&C&D\\
+        A&B&C&D\\
+        A&B&C&D
+    \end{bmatrix}
+    \label{encoreunlabel}
+\end{equation}
+
+Un tableau \ref{labeldemontableau}
+\begin{table}[htp]
+    \centering
+    \begin{tabular}{l|c|c}
+        oui&0&2\\\hline
+        non&10&20
+    \end{tabular}
+    \caption{La légende de mon tableau}
+    \label{labeldemontableau}
+\end{table}
+
+Je cite un article \cite{AAC08a}.

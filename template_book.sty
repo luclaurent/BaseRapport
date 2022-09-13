@@ -1,0 +1,246 @@
+\typeout{}
+\typeout{******************************************************************}
+\typeout{** Feuille de style LaTeX Beamer                             				  **}
+\typeout{** Par Nicolas Travers (<nicolas.travers@cnam.fr>) 2016      **}
+\typeout{** <nicolas.travers@devinci.fr>) 2020      							 **}
+\typeout{** Laboratoire DVRC, Pole Léonard de Vinci, Paris la Défense **}
+\typeout{*****************************************************************}
+\typeout{}
+\typeout{}
+%
+% Pagestyle for Thesis (Nicolas Travers - 2020) 
+%
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{template_book}[2016/02/22 v1.1 from Nicolas Travers]
+\usepackage{a4,fancyhdr,comment,times,epsf,latexsym,epsfig,tikz,kpfonts,lastpage,fullpage,graphicx,enumitem,ifthen,listings,upquote,minted,amsthm,caption}
+\usepackage[explicit]{titlesec}
+\usepackage{fontspec}
+\usepackage[hidelinks]{hyperref}
+
+%%% Si vous avez des caractères à changer
+%\usepackage[latin1]{inputenc}
+%\usepackage[T1]{fontenc}
+
+
+%%%%% Typographie en français.
+\usepackage[french]{babel}
+
+%%%%%%%%%%%% COULEURS A CHANGER %%%%%%%%%%%%%%%%%%%
+\definecolor{fondMaison}{RGB}{193,0,42}
+\definecolor{fond2Maison}{RGB}{207,200,192}
+\definecolor{fond3Maison}{RGB}{170,159,150}
+\definecolor{fond4Maison}{RGB}{133,119,97}
+
+%%%%%%%%%%%% Polices de caractère du système. Maple -> Maison %%%%%%%%
+\newfontfamily\Maisonfont{Maple}
+\newcommand\MaisonFont[1]{{\Maisonfont #1}}
+\newfontfamily\Maisonboldfont{Maple}
+\newcommand\MaisonBoldFont[1]{{\Maisonboldfont #1}}
+
+
+\newtheoremstyle{theoremStyle}{0pt}{4pt}{\color{black}}{}{\color{fondMaison}\Maisonboldfont\bfseries}{:}{ }{}
+\theoremstyle{theoremStyle}
+
+\newtheorem{Example}{Example}[section]
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Definition}{Definition}[section]
+\newtheorem{Lemma}{Lemma}[section]
+\newtheorem{Proof}{Proof}[section]
+\newtheorem{Remark}{Remark}[section]
+
+\rfoot{\color{fondMaison}\MaisonBoldFont{\thepage/\pageref{LastPage}}}
+\lfoot{\color{fondMaison}\MaisonBoldFont{\nom}}
+\cfoot{\color{fondMaison}\MaisonBoldFont{\titreShort}}
+
+\lhead{\color{fondMaison}\large \MaisonBoldFont{\nouppercase{\bfseries{\leftmark}}}\\
+\color{fond2Maison}\large \MaisonBoldFont{\nouppercase{\bfseries{\rightmark}}} \color{black}}
+%%%%%%%%%%%% POUR RAJOUTER LE LOGO SUR TOUTES LES PAGES %%%%%%%%%%
+\rhead{%\includegraphics[height=0.5cm]{\dir/LOGO.jpg}
+}
+
+%mise en page de la page de garde
+\makeatletter
+\def\maketitle{%
+	\thispagestyle{empty}
+%	\clearpage
+	\begin{tikzpicture}[remember picture,overlay,line width=0mm]
+	\draw [draw=white,fill=white]
+	(current page.north west) rectangle (\paperwidth,1);
+	\node[xshift=0\paperwidth,yshift=1cm,text=white,font=\bf\Large,anchor=north west] {
+		\includegraphics[scale=.3]{\logouniversite}
+	};
+	\node[anchor=north east] at (current page.north east){
+		\includegraphics[scale=.3]{\logolabo}
+	};
+%	\node[xshift=.6\paperwidth,yshift=2cm,text=white,font=\bf\Large] {
+%		\includegraphics[scale=\@scalelogolabo]{\@logolabo}
+%	};
+	\node at (current page.center)
+	{\parbox{16cm}{
+			
+			\begin{center}
+			\sffamily\Large \universite
+			\end{center}
+			\begin{center}
+			\sffamily\Large Rapport 
+			\end{center}
+			\begin{center}
+			\sffamily\large USAE1R - Projet d'initiation à la recherche
+			\end{center}
+			\begin{center}
+			\sffamily\Large Formation Ingénieur du Cnam 
+			\end{center}
+			\begin{center}
+			\sffamily\large spécialité Aéronautique et Espace
+			\end{center}
+			\vspace{2cm}
+			\noindent\rule{16cm}{0.5mm}
+			\begin{center}
+			{\setlength{\baselineskip}{1.4\baselineskip}
+				\begin{huge}
+				\bfseries \titre
+				\end{huge}
+				\par}
+			\end{center}
+			\noindent\rule{16cm}{0.5mm}
+			\begin{flushright}
+			\bfseries Apprentis : \nom
+			\end{flushright}
+			%\vspace{1cm}
+			\bigskip
+			\begin{flushleft}
+			\scshape Encadrant(s):
+			\end{flushleft}
+			\begin{flushleft}
+			\scshape Jury:
+			\end{flushleft}
+			\begin{footnotesize}
+			\jury
+			\end{footnotesize}
+			\vspace{2cm}
+			\begin{flushright}
+			\bfseries Date de soutenance : \date
+			\end{flushright}
+		}
+	};
+	\end{tikzpicture}
+}
+
+\makeatother
+
+
+%%%%%%%%%% ENTETE DE CHAPITRE MAISON %%%%%%%%%%%%%%
+\gdef\yshift{-1cm}
+\titleformat{\chapter}
+  {\gdef\chapterlabel{}\normalfont\Huge\bfseries}
+  {\gdef\chapterlabel{\thechapter\ }}
+  {0cm}
+  {\begin{tikzpicture}[remember picture,overlay]
+    \node[xshift=0cm,yshift=\yshift] at (current page.north west)
+      {\begin{tikzpicture}[remember picture, overlay]
+        \draw[fill=fondMaison] (0,0) rectangle
+          (\paperwidth,4cm);
+        \node[anchor=west,xshift=2cm,yshift=1.3cm]
+        	{\color{fond2Maison}\MaisonBoldFont{\chaptername ~ \chapterlabel} \color{fondMaison}Copyright Nicolas Travers © \url{http://chewbii.com}};
+        \node[anchor=east,xshift=.97\paperwidth,rectangle,
+              rounded corners=20pt,inner sep=11pt,
+              fill=fondMaison]
+              {\color{fond2Maison}\MaisonBoldFont{#1}};
+       \end{tikzpicture}
+      };
+   \end{tikzpicture}
+  }
+\titlespacing{\chapter}{0pt}{0pt}{0pt}
+
+\evensidemargin -1cm
+\oddsidemargin 0cm
+\marginparwidth 0pt 
+\marginparsep 0pt
+\topmargin 0cm
+\headsep .2cm
+\textheight 9.5in 
+\textwidth 7in
+\voffset -1.5cm
+\hoffset 0cm
+\headheight 1cm
+
+\setlength{\parskip}{2pt}
+\brokenpenalty=20000
+
+\def\picwidth{16cm}
+
+\pagestyle{fancyplain}
+
+%\setenumerate[1]{font=\itshape, label*=\the\value{section}.\arabic*}%\thesection.
+\setenumerate[1]{font=\itshape, label*=(\arabic*)}%\thesection.
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, answer, Folder, File, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, :-},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  basicstyle=\scriptsize,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{mygreen}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+\lstset{basicstyle=\small,keywordstyle=\color{fondMaison}\bfseries,showtabs=false,showstringspaces=false,language=SQL,breaklines=true,columns=fullflexible, rulesepcolor=\color{fond4Maison},captionpos=b,,rulesepcolor=\color{fond2Maison!75}}
+%frame=trBL,backgroundcolor=\color{fond2Maison!50}
+
+\lstdefinelanguage{datalog}{
+	morekeywords={Chair, answer, Add, strlen, C, F1, F2, L2, in, Asset2d, File, Folder, Category, Asset2d, RGB, RGBDescriptor, IndexService, Map, Template, GetName},
+	 sensitive=true,
+}
+
+\lstdefinelanguage{xquery}{
+	morekeywords={for,let,where,return,Score,collection,Map,ambitus,transpose,trim,lyricsContains,interval},
+	sensitive=false,
+}
+
+
+\lstdefinelanguage{roses}{
+	morekeywords={create,feed,from,where,as,contains,not,or,description,title,window,similar,author,and,subscribe,to,apply,output,file,every,minutes,join,with,on,lang,item,|,last,months,weeks,register,hours,mail},
+	sensitive=false,
+	%morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]",
+}
+
+\lstdefinelanguage{rosesalg}{
+	morekeywords={},
+	literate=
+	{Sigma}{\color{red}$\boldsymbol{\sigma}$\color{black}}1
+	{Cup}{\color{red}$\boldsymbol{\cup}$\color{black}}1
+	{Join}{\color{red}$\boldsymbol{\Join}$\color{black}}1
+	{Omega}{\color{red}$\boldsymbol{\omega}$\color{black}}1
+	{Wedge}{\color{red}$\boldsymbol{\wedge}$\color{black}\;}2
+	}
+
+\newminted{javascript}{framesep=2pt,fontsize=\small}
+\usepackage{tcolorbox}
+\usepackage{etoolbox}
+\tcbset{colback=fond2Maison!90}
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}}%
+\AfterEndEnvironment{minted}{\end{tcolorbox}}%
+
+\BeforeBeginEnvironment{lstlisting}{\begin{tcolorbox}}%
+\AfterEndEnvironment{lstlisting}{\end{tcolorbox}}%
+
+\setlength{\parindent}{.5cm}
+\setlength{\parskip}{0cm}
+\titlespacing{\paragraph}{0cm}{.3cm}{.1cm}
+\titlespacing{\section}{0cm}{.3cm}{.2cm}
+\titlespacing{\subsection}{0cm}{.3cm}{.1cm}
+
+\setlength{\belowcaptionskip}{0pt}
+\setlength{\abovecaptionskip}{5pt}
+\setlength{\dblfloatsep}{5pt}
+\setlength{\floatsep}{5pt}
+\setlength{\textfloatsep}{10pt}
+
+\setlist{itemsep=1pt,topsep=1pt}
