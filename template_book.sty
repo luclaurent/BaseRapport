@@ -13,6 +13,7 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{template_book}[2016/02/22 v1.1 from Nicolas Travers adapted by Luc Laurent]
 \usepackage{a4,fancyhdr,comment,times,epsf,latexsym,epsfig,tikz,kpfonts,lastpage,fullpage,graphicx,enumitem,ifthen,listings,upquote,minted,amsthm,caption}
+\usepackage{etoolbox}
 \usepackage[explicit]{titlesec}
 \usepackage{ifxetex,ifluatex}
 \newif\ifxetexorluatex
@@ -94,12 +95,14 @@
 	\begin{tikzpicture}[remember picture,overlay,line width=0mm]
 	\draw [draw=white,fill=white]
 	(current page.north west) rectangle (\paperwidth,1);
+	\ifdefempty{\logolabo}{}{
 	\node[xshift=0\paperwidth,yshift=1cm,text=white,font=\bf\Large,anchor=north west] {
-		\includegraphics[scale=.3]{\logouniversite}
-	};
+		\includegraphics[width=.3\textwidth]{\logolabo}
+	};}
+	\ifdefempty{\logouniversite}{}{
 	\node[anchor=north east,xshift=\textwidth] at (current page.north west){
-		\includegraphics[scale=.3]{\logolabo}
-	};
+		\includegraphics[width=.3\textwidth]{\logouniversite}
+	};}
 %	\node[xshift=.6\paperwidth,yshift=2cm,text=white,font=\bf\Large] {
 %		\includegraphics[scale=\@scalelogolabo]{\@logolabo}
 %	};
