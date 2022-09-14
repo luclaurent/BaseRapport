@@ -29,20 +29,29 @@
 
 \begin{document}
 
+
+\pagenumbering{roman}
+
 \maketitle
 \newpage
 
 \setlength{\abovedisplayskip}{6pt}
 \setlength{\belowdisplayskip}{6pt}
-% \begingroup
+\pagestyle{intro}
 \tableofcontents
-% \endgroup
-
+\newpage
+\listoffigures
+\listoftables
+\clearpage
+%
 \input{0_resume}
 \input{0_remerciements}
-	\newpage
+%
+\pagestyle{plain}
+\pagenumbering{arabic}
+\newpage
+%	
 \input{01_introduction}
-
 \input{02_etat_de_lart}
 \input{03_contribution}
 \input{09_conclusion}
@@ -50,10 +59,12 @@
 \renewcommand{\bibname}{Bibliography}
 \bibliographystyle{alpha}
 \bibliography{biblio}
-
+\label{LastMainPage}
+%
 \newpage
 \appendix
-
+\pagenumbering{roman}
+\pagestyle{intro}
 \input{12_Annexes}
 
 \input{15_4e_converture}

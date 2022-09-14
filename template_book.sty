@@ -68,21 +68,42 @@
 \newtheorem{Proof}{Proof}[section]
 \newtheorem{Remark}{Remark}[section]
 
+
+\fancypagestyle{plain}{ 
 \ifxetexorluatex
-\rfoot{\color{fondMaison}\MaisonBoldFont{\thepage/\pageref{LastPage}}}
+\rfoot{\color{fondMaison}\MaisonBoldFont{\thepage/\pageref{LastMainPage}}}
 \lfoot{\color{fondMaison}\MaisonBoldFont{\nomcourt}}
 \cfoot{\color{fondMaison}\MaisonBoldFont{\titreShort}}
 
 \lhead{\color{fondMaison}\large \MaisonBoldFont{\nouppercase{\bfseries{\leftmark}}}\\
 \color{fond2Maison}\large \MaisonBoldFont{\nouppercase{\bfseries{\rightmark}}} \color{black}}
 \else
-\rfoot{\color{fondMaison}{\thepage/\pageref{LastPage}}}
+\rfoot{\color{fondMaison}{\thepage/\pageref{LastMainPage}}}
 \lfoot{\color{fondMaison}{\nomcourt}}
 \cfoot{\color{fondMaison}{\titreShort}}
 
 \lhead{\color{fondMaison}\large {\nouppercase{\bfseries{\leftmark}}}\\
 \color{fond2Maison}\large {\nouppercase{\bfseries{\rightmark}}} \color{black}}
 \fi
+}
+\fancypagestyle{intro}{ 
+\ifxetexorluatex
+\rfoot{\color{fondMaison}\MaisonBoldFont{\thepage}}
+\lfoot{\color{fondMaison}\MaisonBoldFont{\nomcourt}}
+\cfoot{\color{fondMaison}\MaisonBoldFont{\titreShort}}
+
+\lhead{\color{fondMaison}\large \MaisonBoldFont{\nouppercase{\bfseries{\leftmark}}}\\
+\color{fond2Maison}\large \MaisonBoldFont{\nouppercase{\bfseries{\rightmark}}} \color{black}}
+\else
+\rfoot{\color{fondMaison}{\thepage}}
+\lfoot{\color{fondMaison}{\nomcourt}}
+\cfoot{\color{fondMaison}{\titreShort}}
+
+\lhead{\color{fondMaison}\large {\nouppercase{\bfseries{\leftmark}}}\\
+\color{fond2Maison}\large {\nouppercase{\bfseries{\rightmark}}} \color{black}}
+\fi
+}
+
 %%%%%%%%%%%% POUR RAJOUTER LE LOGO SUR TOUTES LES PAGES %%%%%%%%%%
 \rhead{%\includegraphics[height=0.5cm]{\dir/LOGO.jpg}
 }
@@ -203,7 +224,7 @@
 
 \def\picwidth{16cm}
 
-\pagestyle{fancyplain}
+\pagestyle{plain}
 
 %\setenumerate[1]{font=\itshape, label*=\the\value{section}.\arabic*}%\thesection.
 \setenumerate[1]{font=\itshape, label*=(\arabic*)}%\thesection.
