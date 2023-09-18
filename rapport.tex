@@ -1,5 +1,10 @@
 \documentclass[10pt]{article}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% définition de la page de garde
 \def\nom{PRENOMA NOMA\\PRENOMB NOMB}
 \def\nomcourt{NOM court}	% bas de page
 \def\email{prenom.nom.auditeur@lecnam.net}
@@ -14,59 +19,192 @@
 \def\jury{
 	{\sc Prof 1}\\
 	{\sc Prof 2}}
-\def\ecoledoc{École doctorale ...}
+\def\ecoledoc{}
 \def\date{DATE}
 
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% chargement des packages
 \usepackage{template_book}
 
-\input{definition.tex}
-
+% chemin du dossier des figures (format png, jpeg)
 \graphicspath{{figs/}}
 
+% définition des couleurs
 \definecolor{mygray}{gray}{0.4}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% début du coeur du document
 \begin{document}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% numérotation des pages
 \pagenumbering{roman}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% génération de la page de titre
 \maketitle
+% saut de page
 \newpage
-
+%paramétrage de quelques dimensions
 \setlength{\abovedisplayskip}{6pt}
 \setlength{\belowdisplayskip}{6pt}
+
+% style de page avant le coeur
 \pagestyle{intro}
+% affichage table des matières
 \tableofcontents
 \newpage
+%affichage table des figure et des tableaux
 \listoffigures
 \listoftables
 \clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{Remerciements}
+Merci beaucoup
 %
-\input{0_resume}
-\input{0_remerciements}
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% format page de coeur (entête, piede de page, type de numérotation)
 \pagestyle{plain}
 \pagenumbering{arabic}
 \newpage
 %	
-\input{01_introduction}
-\input{02_etat_de_lart}
-\input{03_contribution}
-\input{09_conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+J'inclus une figure
+\begin{figure}[htp!]
+\centering
+\includegraphics[width=0.5\textwidth]{LOGO_LMSSC}
+\caption{Une légende}
+\label{unlabel}
+\end{figure}
+
+
+J'écris une équation dans la ligne \(\exp x+10\geq0\).
+J'écris une équation centrée et isolée:
+\begin{equation}
+	f(\theta)=\cos\theta+\sin\theta
+	\label{unautrelabel}
+\end{equation}
+
+Je fais référence à ma figure \ref{unlabel} ou à une équation~\ref{unautrelabel}.
+
+\begin{equation}
+    \mathbf{A}=\begin{bmatrix}
+        A&B&C&D\\
+        A&B&C&D\\
+        A&B&C&D
+    \end{bmatrix}
+    \label{encoreunlabel}
+\end{equation}
+
+Un tableau \ref{labeldemontableau}
+\begin{table}[htp]
+    \centering
+    \begin{tabular}{l|c|c}
+        oui&0&2\\\hline
+        non&10&20
+    \end{tabular}
+    \caption{La légende de mon tableau}
+    \label{labeldemontableau}
+\end{table}
+
+Je cite un article \cite{AAC08a}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Etat de l'art}
+
+Etat de l'art
+\subsection{Une sous-section}
+\subsubsection{Une sous-sous-section}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Contribution...}
+
+Ma contribution
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+
+Mes conclusions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bibliographie
 \newpage
 \renewcommand{\bibname}{Bibliography}
-\bibliographystyle{alpha}
+% style bibliographie: https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles
+\bibliographystyle{apalike}
+% fichier bibliographie (biblio.bib)
 \bibliography{biblio}
 \label{LastMainPage}
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% annexes
 \newpage
 \appendix
 \pagenumbering{roman}
 \pagestyle{intro}
-\input{12_Annexes}
+\section*{Annexes}
+\subsection*{Nouvelles annexes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Quatrième de couverture
+\newpage
+\thispagestyle{empty}
+\noindent\fbox{%
+\begin{minipage}{\textwidth}
+\begin{center}
+\textsc{{\bf Abstract}}
+\end{center} 
 
-\input{15_4e_converture}
+In english
+\end{minipage}
+}
+
+\vspace{0.5cm}
+
+\noindent\fbox{%
+\begin{minipage}{\textwidth}
+\begin{center}
+	\textsc{{\bf Résumé}}
+\end{center}
+
+En Français
+\end{minipage}
+}
+
+
+\vfill
+
+\textbf{Mots-clefs:}
 
 \end{document}
